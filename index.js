@@ -108,6 +108,38 @@ function detailGambar(url) {
       <td>${val.stat.name}</td> </tr>`;
     });
 
+    let dataMoves = "";
+    $.each(res.moves, function (key, val) {
+      dataMoves += `<tr>
+      <td>${key + 1}</td>
+      <td>${val.move.name}</td>
+      /tr>`;
+    });
+
+    let dataSpecies = "";
+    dataSpecies = `<tr><td>${res.species.name}</td><td>${res.species.url}</td></tr>`;
+
+    let dataForms = "";
+    $.each(res.forms, function (key, val) {
+      dataForms += `<tr><td>${key + 1}</td><td>${val.name}</td><td>${
+        val.url
+      }</td></tr>`;
+    });
+
+    let dataGame = "";
+    $.each(res.game_indices, function (key, val) {
+      dataGame += `<tr>
+      <td>${key + 1}</td>
+      <td>${val.game_index}</td>
+      <td>${val.version.name}</td>
+      <td>${val.version.url}</td>
+      </tr>`;
+    });
+
+    $("#data-games").html(dataGame);
+    $("#data-forms").html(dataForms);
+    $("#data-species").html(dataSpecies);
+    $("#data-movess").html(dataMoves);
     $("#data-status").html(dataStats);
     $("#data-types").html(dataTypes);
     $("#order-pokemon").html(dataOrder);

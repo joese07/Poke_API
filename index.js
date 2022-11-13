@@ -61,7 +61,7 @@ function detailGambar(url) {
     url: url,
   }).done((res) => {
     let temp = "";
-    temp = `<img src="${res.sprites.other.dream_world.front_default}" alt="Girl in a jacket" width="200" height="300" style="margin-left:auto; margin-rigth:auto">`;
+    temp = `<img src="${res.sprites.other.dream_world.front_default}" alt="Girl in a jacket" width="200" height="300">`;
     let kemampuan = "";
     $.each(res.abilities, function (key, val) {
       kemampuan += `<button class="nav-link" id="v-pills-${val.ability.name}-tab" data-bs-toggle="pill" data-bs-target="#buka-detail" type="button" role="tab" aria-controls="v-pills-${val.ability.name}" aria-selected="false" onclick="detailAbility('${val.ability.url}')">${val.ability.name}</button>

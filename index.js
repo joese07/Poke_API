@@ -72,6 +72,50 @@ function detailGambar(url) {
       dataKemampuan += `<div class="tab-pane fade" id="buka-detail" role="tabpanel" aria-labelledby="v-pills-${val.ability.name}-tab" tabindex="0"></div>
      `;
     });
+    let dataId = "";
+    dataId = res.id;
+
+    let dataBase = "";
+    dataBase = res.base_experience;
+
+    let dataHeight = "";
+    dataHeight = res.height;
+
+    let dataWeight = "";
+    dataWeight = res.weight;
+
+    let dataIsdefault = "";
+    dataIsdefault = res.is_default;
+
+    let dataOrder = "";
+    dataOrder = res.order;
+
+    let dataTypes = "";
+    $.each(res.types, function (key, val) {
+      dataTypes += `
+      <tr>
+      <td>${val.slot}</td>
+      <td>${val.type.name}</td>
+      </tr>
+    `;
+    });
+
+    let dataStats = "";
+    $.each(res.stats, function (key, val) {
+      dataStats += `<tr>
+      <td>${val.base_stat}</td>
+      <td>${val.effort}</td>
+      <td>${val.stat.name}</td> </tr>`;
+    });
+
+    $("#data-status").html(dataStats);
+    $("#data-types").html(dataTypes);
+    $("#order-pokemon").html(dataOrder);
+    $("#isdefault-pokemon").html(dataIsdefault);
+    $("#weight-pokemon").html(dataWeight);
+    $("#height-pokemon").html(dataHeight);
+    $("#base-experience-pokemon").html(dataBase);
+    $("#id-pokemon").html(dataId);
     $("#v-pills-tabContent").html(dataKemampuan);
     $("#v-pills-tab").html(kemampuan);
     $("#gambar-detail").html(temp);

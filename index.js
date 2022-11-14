@@ -1,27 +1,27 @@
-const animals = [
-  { name: "budi", species: "dog", class: { name: "mamalia" } },
+// const animals = [
+//   { name: "budi", species: "dog", class: { name: "mamalia" } },
 
-  { name: "nemo", species: "fish", class: { name: "invertebrata" } },
+//   { name: "nemo", species: "fish", class: { name: "invertebrata" } },
 
-  { name: "bayu", species: "dog", class: { name: "mamalia" } },
+//   { name: "bayu", species: "dog", class: { name: "mamalia" } },
 
-  { name: "jalin", species: "dog", class: { name: "mamalia" } },
+//   { name: "jalin", species: "dog", class: { name: "mamalia" } },
 
-  { name: "dory", species: "fish", class: { name: "invertebrata" } },
-];
+//   { name: "dory", species: "fish", class: { name: "invertebrata" } },
+// ];
 
-const Onlydog = animals.filter((data) => data.species === "dog");
-console.log(Onlydog);
+// const Onlydog = animals.filter((data) => data.species === "dog");
+// console.log(Onlydog);
 
-function Fish(item) {
-  if (item.species === "fish") {
-    item.class.name = "ovipar";
-  }
-}
+// function Fish(item) {
+//   if (item.species === "fish") {
+//     item.class.name = "ovipar";
+//   }
+// }
 
-animals.forEach(Fish);
-const Onlyfish = animals.filter((data) => data.species === "fish");
-console.log(Onlyfish);
+// animals.forEach(Fish);
+// const Onlyfish = animals.filter((data) => data.species === "fish");
+// console.log(Onlyfish);
 
 $.ajax({
   url: "https://pokeapi.co/api/v2/pokemon/",
@@ -136,6 +136,57 @@ function detailGambar(url) {
       </tr>`;
     });
 
+    let config = null;
+    const myChart = document.getElementById("myChart");
+
+    let dataStatsLabel = res.stats.map((data) => data.stat.name);
+
+    let dataStatsBase = res.stats.map((data) => data.base_stat);
+    const data = {
+      labels: dataStatsLabel,
+      datasets: [
+        {
+          label: "Stats",
+          data: dataStatsBase,
+          fill: true,
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgb(255, 99, 132)",
+          pointBackgroundColor: "rgb(255, 99, 132)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgb(255, 99, 132)",
+        },
+      ],
+    };
+
+    if (Chart.getChart("myChart")) {
+      Chart.getChart("myChart").destroy();
+    }
+
+    config = new Chart(myChart, {
+      type: "radar",
+      data: data,
+      options: {
+        elements: {
+          line: {
+            borderWidth: 3,
+          },
+        },
+      },
+    });
+
+    // config = new Chart(myChart, {
+    //   type: "radar",
+    //   data: data,
+    //   options: {
+    //     elements: {
+    //       line: {
+    //         borderWidth: 3,
+    //       },
+    //     },
+    //   },
+    // });
+
     $("#data-games").html(dataGame);
     $("#data-forms").html(dataForms);
     $("#data-species").html(dataSpecies);
@@ -152,7 +203,6 @@ function detailGambar(url) {
     $("#v-pills-tab").html(kemampuan);
     $("#gambar-detail").html(temp);
     $(".modal-title").html(res.name);
-    console.log(kemampuan);
   });
 }
 

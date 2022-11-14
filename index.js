@@ -47,15 +47,6 @@ $.ajax({
     console.log(err);
   });
 
-// function detailPoke(url) {
-//   $.ajax({
-//     url: url,
-//   }).done((res) => {
-//     $(".modal-title").html(res.name);
-//     console.log(res.name);
-//   });
-// }
-
 function detailGambar(url) {
   $.ajax({
     url: url,
@@ -175,17 +166,55 @@ function detailGambar(url) {
       },
     });
 
-    // config = new Chart(myChart, {
-    //   type: "radar",
-    //   data: data,
-    //   options: {
-    //     elements: {
-    //       line: {
-    //         borderWidth: 3,
-    //       },
-    //     },
-    //   },
-    // });
+    let configChart = null;
+    const dataMyChart = document.getElementById("dataMyChart");
+
+    const labels = ["Base Experience", "Height", "Weight"];
+    const dataChart = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Dataset 1",
+          data: [dataBase, dataHeight, dataWeight],
+          borderColor: ["rgba(196, 236, 116)", "yellow", "red"],
+          backgroundColor: ["rgba(196, 236, 116)", "yellow", "red"],
+        },
+      ],
+    };
+
+    if (Chart.getChart("dataMyChart")) {
+      Chart.getChart("dataMyChart").destroy();
+    }
+
+    configChart = new Chart(dataMyChart, {
+      type: "bar",
+      data: dataChart,
+      options: {
+        indexAxis: "y",
+        // Elements options apply to all of the options unless overridden in a dataset
+        // In this case, we are setting the border of each horizontal bar to be 2px wide
+        elements: {
+          bar: {
+            borderWidth: 2,
+          },
+        },
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "right",
+            labels: {
+              font: {
+                size: 12,
+              },
+            },
+          },
+          title: {
+            display: true,
+            text: "Specialis Detail Pokemon",
+          },
+        },
+      },
+    });
 
     $("#data-games").html(dataGame);
     $("#data-forms").html(dataForms);

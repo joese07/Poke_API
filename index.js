@@ -41,7 +41,6 @@ $.ajax({
     });
     // console.log(temp);
     $("#tablePoke").html(temp);
-    console.log(res.results);
   })
   .fail((err) => {
     console.log(err);
@@ -244,6 +243,5 @@ function detailAbility(data) {
       detailKemampuan = `<p>${val.effect}</p>`;
     });
     $("#buka-detail").html(detailKemampuan);
-    console.log(detailKemampuan);
   });
 }
